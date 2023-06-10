@@ -1,0 +1,12 @@
+Avant de lancer le ChatBot il faut installer NodeJs pour avoir la bibliotheque "wss" qui va nous aider a l'encryption du message.
+
+
+1- Install NodeJs.
+2- Ouvrir terminal dans le dossier "ChatBot server".
+3- Exploiter la command "npm i".
+4- Pour lancer le server "node server.js".
+5- Ouvrir le ficher index.html dans ChatBot client sur le navigateur.
+6- Envoyer un message, et le message sera chiffree dans le console du serveur.
+
+
+- Le video de simulation explique les etapes 4, 5 et 6. 

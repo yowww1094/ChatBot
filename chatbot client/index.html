@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Application de chat encryptee</title>
+</head>
+
+<body>
+    <h1>Application de chat encryptee</h1>
+
+    <div id="chat-box"></div>
+
+    <input type="text" id="input-box">
+    <button id="send-button">Send</button>
+    <button id="disconnect-button">Disconnect</button>
+
+    <script>
+        
+        const SERVER_ADDRESS = 'localhost';
+        const SERVER_PORT = 8000;
+
+        
+        const socket = new WebSocket(`ws://${SERVER_ADDRESS}:${SERVER_PORT}`);
+        
+        socket.onopen = () => {
+            console.log('Connected to the server');
+        };
+        socket.onmessage = (event) => {
+            const message = event.data;
+            displayMessage(message);
+        };
+        socket.onclose = () => {
+            console.log('Disconnected from the server');
+        };
+
+        
+        function sendMessage() {
+            const message = document.getElementById('input-box').value;
+            if (message.trim()) {
+                socket.send(message);
+                document.getElementById('input-box').value = '';
+            }
+            displayMessage(message)
+        }
+
+        
+        function displayMessage(message) {
+            const chatBox = document.getElementById('chat-box');
+            const newMessage = document.createElement('p');
+            newMessage.textContent = message;
+            chatBox.appendChild(newMessage);
+        }
+
+        
+        function disconnect() {
+            socket.close();
+        }
+
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('disconnect-button').addEventListener('click', disconnect);
+
+    </script>
+</body>
+
+</html>
